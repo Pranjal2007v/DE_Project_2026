@@ -22,10 +22,10 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Pranjal Gangwar| 2501010675| Pranjal2007v|
+| Member 2 | Himanshu Verma| 2501010186| bitflicker64|
+| Member 3 | Ishita Neeraj Sharma| 2501010195| ishitasharma2490|
+| Member 4 | Payal Phougat| 2501010331| Payal-Phougat|
 
 **Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
 
