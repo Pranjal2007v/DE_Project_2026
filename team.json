@@ -1,0 +1,32 @@
+{
+  "team_no": 19,
+  "sections": ["C", "E"],
+  "repository_url": "https://github.com/Pranjal2007v/DE_Project_2026",
+  "members": [
+    {
+      "role": "Group Lead",
+      "name": "Pranjal Gangwar",
+      "enrollment_no": "2501010675",
+      "github_username": "Pranjal2007v"
+    },
+    {
+      "role": "Member 2",
+      "name": "Himanshu Verma",
+      "enrollment_no": "2501010186",
+      "github_username": "bitflicker64"
+    },
+    {
+      "role": "Member 3",
+      "name": "Ishita Neeraj Sharma",
+      "enrollment_no": "2501010195",
+      "github_username": "ishitasharma2490"
+    },
+    {
+      "role": "Member 4",
+      "name": "Payal Phougat",
+      "enrollment_no": "2501010331",
+      "github_username": "Payal-Phougat"
+    }
+  ]
+}
+
