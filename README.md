@@ -13,6 +13,11 @@
 | `queries/workload_30.sql` | The 30 queries for Phase 3 (do not edit) |
 | `benchmarks/run_benchmark.sh` | Timing script: 3 runs per query, average, raw plans saved |
 | `CHECKPOINTS.md` | Checkpoint dates and the files each one needs (DE and AP repos) |
+| `team.json` | Team number, members and benchmark machine |
+| `docs/` | Phase 1 to 5 reports (`01_problem_understanding.md` … `05_scalability_report.md`) |
+| `sql/` | Schema, load script, indexes, optimized queries and partitioning DDL |
+| `diagrams/er_diagram.png` | ER diagram (the Mermaid source is in `docs/02_schema_design.md`) |
+| `benchmarks/results/` | `summary.csv` for the baseline, optimized and large runs |
 
 **Getting started:** **clone this repository and push it into your team's DE repo** (the DE repo you submitted in the form); the steps are in [`CHECKPOINTS.md`](CHECKPOINTS.md). Keep the structure shown in [Repository structure](#repository-structure-submit-exactly-this). Unzip `seed_data.zip` inside your project folder, but don't commit the CSV files. Deadlines are in [`CHECKPOINTS.md`](CHECKPOINTS.md). Then begin with Phase 1.
 
