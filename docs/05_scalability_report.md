@@ -107,7 +107,7 @@ price_changes_2026q2  → April–June 2026   ← R08 (June alerts) lives here
 
 ### Real-time lookups (< 5 ms target)
 
-R01, R02, R05, R06, R07, R11, R23, W01–W05 all remain under 5 ms at 20×. These queries are index-point-lookups or index-range-scans with small result sets. The scaling factor of ≈ 2.5× means even at 100× data they would stay under 5 ms.
+R01, R02, R03, R05, R06, R07, R10, R11, R23, W01, W02, W03 and W05 all remain under 5 ms at 20×. These queries are index-point-lookups or index-range-scans with small result sets. The scaling factor of ≈ 2.5× means even at 100× data they would stay under 5 ms.
 
 ### Interactive tools (< 250 ms target)
 
