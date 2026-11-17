@@ -1,7 +1,7 @@
 # Phase 4: Query Optimization Report
 
 **Database:** `housing` schema · PostgreSQL 16.15 · Seed dataset (120,060 properties, 100,000 enquiries, 69,999 shortlists)
-**Files:** `sql/05_indexes.sql` (13 indexes), `sql/06_optimized_queries.sql` (30 optimized queries), `benchmarks/results/optimized/summary.csv`
+**Files:** `sql/05_indexes.sql` (22 indexes), `sql/06_optimized_queries.sql` (30 optimized queries), `benchmarks/results/optimized/summary.csv`
 
 > [!IMPORTANT]
 > R13 is a **correctness fix** in addition to an optimization. The original `NOT IN` query returned 0 rows due to NULL propagation. The optimized `NOT EXISTS` version returns the correct 120 projects.
@@ -36,7 +36,7 @@ The baseline (Phase 3) identified three root causes behind the 11,727 ms total:
 | `idx_price_changes_property_id` | `price_changes(property_id)` | R08 |
 | `idx_shortlists_property_id` | `shortlists(property_id)` | R25 |
 
-### Group B — Composite covering indexes (13 indexes total, including group A overlap)
+### Group B — Composite, partial, covering and expression indexes (13 indexes)
 
 | Index | Column(s) / condition | Queries helped | Key benefit |
 |-------|-----------------------|----------------|-------------|
@@ -54,7 +54,7 @@ The baseline (Phase 3) identified three root causes behind the 11,727 ms total:
 | `idx_prop_sale_apt_posted` | `(locality_id, listing_type, property_type, posted_at) INCLUDE (…) WHERE listing_type='SALE' AND property_type='APARTMENT'` | R04 | Partial covering; date range becomes index scan |
 | `idx_localities_city_id` | `localities(city_id)` | R15, R19, R25 | FK from localities to city; speeds city filter |
 
-**Total indexes after Phase 4:** 20 (Phase 2 automatic) + 13 (Phase 4 manual) = **33 indexes**
+**Total indexes after Phase 4:** 20 (Phase 2 automatic) + 22 (Phase 4: 9 in group A, 13 in group B) = **42 indexes**
 
 ---
 
