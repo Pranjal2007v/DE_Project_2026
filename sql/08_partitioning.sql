@@ -7,7 +7,7 @@
 -- Expected database size: ~1.3 GB (from 64 MB × 20).
 --
 -- Strategy:
---   - RANGE partition `properties` by `posted_at` (yearly slabs 2023–2027 + default)
+--   - RANGE partition `properties` by `posted_at` (yearly slabs 2023–2026 + default)
 --   - HASH partition `enquiries` into 8 shards (access is by property_id / user_id,
 --     no natural time ordering dominates)
 --   - All Phase 4 indexes are recreated on each partition (PostgreSQL inherits them
