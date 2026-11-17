@@ -40,7 +40,7 @@ properties_future → all other dates (default)
 
 **Why RANGE on `posted_at`?**
 - R04 (price trends), R14 (agent leaderboard), R20 (growth per day) all filter on `posted_at` date ranges. Partition pruning limits the scan to 1–2 partitions (< 500k rows) instead of 2.4M.
-- W04 (nightly deactivation) filters `posted_at < cutoff`; pruning makes the update touch only older partitions.
+- W04 (nightly deactivation) filters `posted_at < 2026-03-03` (1 July 2026 minus 120 days). Every partition, including `properties_2026` and the default one, can hold older rows, so pruning skips none of them; W04 is fast because of the partial index `idx_prop_active_posted`.
 - Each yearly partition fits in memory (≈ 250 MB), so even a full-partition seq-scan is fast.
 
 ### 2b. `enquiries` — HASH on `property_id` (8 buckets)
@@ -131,7 +131,7 @@ W04 deactivates 288,800 rows at 20× (20× the 14,440 seed rows) in 24.7 ms, wel
 | R08 | Prunes to `price_changes_2026q2`; ≈ 60k rows instead of 468k |
 | R14 | `status IN ('SOLD','RENTED')` + `posted_at >= '2026-01-01'` prunes to `properties_2026` |
 | R20 | June date range prunes to `properties_2026` |
-| W04 | `posted_at < cutoff` prunes to older partitions; avoids touching `properties_2026` |
+| W04 | No pruning: the cutoff (3 Mar 2026) falls inside `properties_2026`, and the default partition can hold older rows. The partial index does the work |
 | R06, R19, R25 | Enquiry hash partitions; lookup by `property_id` hits 1 of 8 shards |
 
 ---
