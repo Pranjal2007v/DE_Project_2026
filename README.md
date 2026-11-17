@@ -31,6 +31,40 @@
 
 ---
 
+## How to run
+
+Run everything from the repository root. You need PostgreSQL 15 or newer and `psql`.
+
+```bash
+unzip seed_data.zip                      # creates seed_data/ (ignored by git)
+createdb housing
+psql -d housing -c "ALTER DATABASE housing SET timezone TO 'Asia/Kolkata';"
+psql -d housing -f sql/01_schema.sql     # schema "housing", constraints only
+psql -d housing -f sql/02_load_data.sql  # loads the 12 CSV files, then ANALYZE
+./benchmarks/run_benchmark.sh housing baseline
+psql -d housing -f sql/05_indexes.sql
+./benchmarks/run_benchmark.sh housing optimized 3 sql/06_optimized_queries.sql
+```
+
+The time zone matters: several queries compare timestamps with date literals, and the data is Indian.
+For the large dataset, load `large_data/` instead of `seed_data/` (change the folder name in `sql/02_load_data.sql`) and write the results to `large`.
+
+## Results
+
+Sum of the average times of all 30 queries, from `benchmarks/results/*/summary.csv`:
+
+| Run | Data | Total (ms) |
+|-----|------|-----------:|
+| Baseline (Phase 3) | seed, 120,060 properties | 11,727.031 |
+| Optimized (Phase 4) | seed, 120,060 properties | 47.985 |
+| Optimized (Phase 5) | large, 2,401,200 properties | 120.675 |
+
+R19 was 87.6% of the baseline total (10,270.868 ms) and takes 8.743 ms after optimization.
+R13 returned 0 rows in the original workload because `NOT IN` meets NULL `project_id` values; the `NOT EXISTS` rewrite returns the 120 projects with no listing.
+Details: [`docs/03_baseline_timings.md`](docs/03_baseline_timings.md), [`docs/04_optimization_report.md`](docs/04_optimization_report.md), [`docs/05_scalability_report.md`](docs/05_scalability_report.md).
+
+---
+
 ## How this project works
 
 | Phase | What you do | You submit | Counts toward | Marks |
