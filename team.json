@@ -1,32 +1,13 @@
 {
-  "team_no": 19,
+  "team_number": "19",
   "sections": ["C", "E"],
   "repository_url": "https://github.com/Pranjal2007v/DE_Project_2026",
+  "group_lead": { "name": "Pranjal Gangwar", "enrollment_no": "2501010675", "github": "Pranjal2007v" },
   "members": [
-    {
-      "role": "Group Lead",
-      "name": "Pranjal Gangwar",
-      "enrollment_no": "2501010675",
-      "github_username": "Pranjal2007v"
-    },
-    {
-      "role": "Member 2",
-      "name": "Himanshu Verma",
-      "enrollment_no": "2501010186",
-      "github_username": "bitflicker64"
-    },
-    {
-      "role": "Member 3",
-      "name": "Ishita Neeraj Sharma",
-      "enrollment_no": "2501010195",
-      "github_username": "ishitasharma2490"
-    },
-    {
-      "role": "Member 4",
-      "name": "Payal Phougat",
-      "enrollment_no": "2501010331",
-      "github_username": "Payal-Phougat"
-    }
-  ]
+    { "name": "Himanshu Verma", "enrollment_no": "2501010186", "github": "bitflicker64" },
+    { "name": "Ishita Neeraj Sharma", "enrollment_no": "2501010195", "github": "ishitasharma2490" },
+    { "name": "Payal Phougat", "enrollment_no": "2501010331", "github": "Payal-Phougat" }
+  ],
+  "postgres_version": "16.15",
+  "laptop_used_for_benchmarks": "Linux, 2 vCPU Intel Xeon 2.1 GHz, 8 GB RAM"
 }
-
