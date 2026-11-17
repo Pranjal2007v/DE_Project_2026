@@ -172,7 +172,7 @@ Total database size at 20×: ≈ 700 MB data + 610 MB indexes ≈ **1.3 GB** —
 | Metric | Seed (Phase 3) | Optimized seed (Phase 4) | 20× large (Phase 5) |
 |--------|---------------:|-------------------------:|--------------------:|
 | Total query time | 11,727 ms | 48.0 ms | 120.7 ms |
-| Queries meeting targets | 0 / 30 | 30 / 30 | 30 / 30 |
+| Queries meeting targets | 23 / 30 (R13 fast but wrong) | 30 / 30 | 30 / 30 |
 | R13 correctness | ❌ wrong | ✅ fixed | ✅ fixed |
 | Slowest query | R19: 10,271 ms | R19: 8.7 ms | R19: 19.8 ms |
 | Write W04 | 108 ms | 9.8 ms | 24.7 ms |
