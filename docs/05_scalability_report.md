@@ -33,8 +33,8 @@
 ```
 properties_2023  → 2023-01-01 to 2023-12-31
 properties_2024  → 2024-01-01 to 2024-12-31
-properties_2025  → 2025-01-01 to 2025-12-31
-properties_2026  → 2026-01-01 to 2026-12-31   ← seed data lives here
+properties_2025  → 2025-01-01 to 2025-12-31   ← seed data, Jan–Dec 2025
+properties_2026  → 2026-01-01 to 2026-12-31   ← seed data, Jan–Jun 2026
 properties_future → all other dates (default)
 ```
 
