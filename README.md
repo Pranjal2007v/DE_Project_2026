@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | Pranjal Gangwar| 2501010675| Pranjal2007v|
-| Member 2 | Himanshu Verma| 2501010186| bitflicker64|
-| Member 3 | Ishita Neeraj Sharma| 2501010195| ishitasharma2490|
-| Member 4 | Payal Phougat| 2501010331| Payal-Phougat|
+| Group Lead | Pranjal Gangwar | 2501010675 | [Pranjal2007v](https://github.com/Pranjal2007v) |
+| Member 2 | Himanshu Verma | 2501010186 | [bitflicker64](https://github.com/bitflicker64) |
+| Member 3 | Ishita Neeraj Sharma | 2501010195 | [ishitasharma2490](https://github.com/ishitasharma2490) |
+| Member 4 | Payal Phougat | 2501010331 | [Payal-Phougat](https://github.com/Payal-Phougat) |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** 19 · **Section:** C, E · **Repository URL:** <https://github.com/Pranjal2007v/DE_Project_2026>
 
 ---
 
