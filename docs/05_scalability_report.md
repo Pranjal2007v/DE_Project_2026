@@ -60,7 +60,7 @@ price_changes_2026q2  → April–June 2026   ← R08 (June alerts) lives here
 ```
 
 **Why quarterly?**
-- R08 queries a 1-month window (`changed_at >= '2026-06-01' AND < '2026-07-01'`). With quarterly partitions, pruning isolates R08 to one partition of ≈ 117k rows at 20×.
+- R08 queries a 1-month window (`changed_at >= '2026-06-01' AND < '2026-07-01'`). With quarterly partitions, pruning isolates R08 to one partition (`price_changes_2026q2`) instead of all 468,500 rows.
 
 ---
 
@@ -128,7 +128,7 @@ W04 deactivates 288,800 rows at 20× (20× the 14,440 seed rows) in 24.7 ms, wel
 | Query | Why partitioning helps at 20× |
 |-------|-------------------------------|
 | R04 | Prunes to `properties_2026`; scans ≈ 480k rows instead of 2.4M |
-| R08 | Prunes to `price_changes_2026q2`; ≈ 60k rows instead of 468k |
+| R08 | Prunes to `price_changes_2026q2`, one quarter instead of all 468,500 rows |
 | R14 | `status IN ('SOLD','RENTED')` + `posted_at >= '2026-01-01'` prunes to `properties_2026` |
 | R20 | June date range prunes to `properties_2026` |
 | W04 | No pruning: the cutoff (3 Mar 2026) falls inside `properties_2026`, and the default partition can hold older rows. The partial index does the work |
