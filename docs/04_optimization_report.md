@@ -163,10 +163,10 @@ Rewriting to `ORDER BY property_id DESC LIMIT 1` lets the planner use `idx_prop_
 | W03 | 0.763 | 0.771 | 1× | ✅ < 5 ms |
 | W04 | 108.189 | 9.847 | **11×** | ✅ < 1 s |
 | W05 | 15.501 | 0.298 | **52×** | ✅ < 5 ms |
-| **Total** | **11,727 ms** | **40.9 ms** | **286×** | |
+| **Total** | **11,727.031 ms** | **47.985 ms** | **244×** | |
 
 > [!TIP]
-> The total time dropped from **11.7 seconds to 40.9 ms** — a **286× improvement** on the seed dataset. R19 alone accounted for 87.6% of baseline time and went from 10.3 s to 8.7 ms.
+> The total time dropped from **11.7 seconds to 48.0 ms** — a **244× improvement** on the seed dataset. R19 alone accounted for 87.6% of baseline time and went from 10.3 s to 8.7 ms.
 
 ---
 
