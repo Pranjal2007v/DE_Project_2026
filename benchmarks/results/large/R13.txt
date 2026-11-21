@@ -1,0 +1,15 @@
+=== R13 run 1 ===
+Seq Scan on projects pj  (cost=0.00..1166042084.00 rows=12000 width=39) (actual time=316459.591..316459.591 rows=0.00 loops=1)
+  Filter: (NOT (ANY (project_id = (SubPlan 1).col1)))
+  Rows Removed by Filter: 24000
+  Buffers: shared hit=8641 read=37471, temp read=9844362 written=3580
+  SubPlan 1
+    ->  Materialize  (cost=0.00..91166.96 rows=2401264 width=4) (actual time=0.001..7.132 rows=275184.57 loops=24000)
+          Storage: Disk  Maximum Storage: 28610kB
+          Buffers: shared hit=8297 read=37471, temp read=9844362 written=3580
+          ->  Seq Scan on properties p  (cost=0.00..69780.64 rows=2401264 width=4) (actual time=0.009..94.484 rows=2401264.00 loops=1)
+                Buffers: shared hit=8297 read=37471
+Planning:
+  Buffers: shared hit=93
+Planning Time: 0.242 ms
+Execution Time: 316460.169 ms

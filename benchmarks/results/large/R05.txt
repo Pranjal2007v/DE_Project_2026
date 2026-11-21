@@ -1,0 +1,45 @@
+=== R05 run 1 ===
+Limit  (cost=1000.00..9377.25 rows=200 width=28) (actual time=0.136..8.366 rows=200.00 loops=1)
+  Buffers: shared hit=1 read=3119
+  ->  Gather  (cost=1000.00..71955.32 rows=1694 width=28) (actual time=0.136..8.357 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=1 read=3119
+        ->  Parallel Seq Scan on properties  (cost=0.00..70785.92 rows=706 width=28) (actual time=0.085..6.024 rows=162.33 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 50204
+              Buffers: shared hit=1 read=3119
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.177 ms
+Execution Time: 8.408 ms
+=== R05 run 2 ===
+Limit  (cost=1000.00..9377.25 rows=200 width=28) (actual time=0.098..7.822 rows=200.00 loops=1)
+  Buffers: shared hit=15 read=3009
+  ->  Gather  (cost=1000.00..71955.32 rows=1694 width=28) (actual time=0.098..7.813 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=15 read=3009
+        ->  Parallel Seq Scan on properties  (cost=0.00..70785.92 rows=706 width=28) (actual time=0.107..5.750 rows=141.67 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 48489
+              Buffers: shared hit=15 read=3009
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.172 ms
+Execution Time: 7.865 ms
+=== R05 run 3 ===
+Limit  (cost=1000.00..9377.25 rows=200 width=28) (actual time=0.081..7.117 rows=200.00 loops=1)
+  Buffers: shared hit=8 read=2872
+  ->  Gather  (cost=1000.00..71955.32 rows=1694 width=28) (actual time=0.081..7.109 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=8 read=2872
+        ->  Parallel Seq Scan on properties  (cost=0.00..70785.92 rows=706 width=28) (actual time=0.109..5.090 rows=147.67 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 45860
+              Buffers: shared hit=8 read=2872
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.158 ms
+Execution Time: 7.153 ms

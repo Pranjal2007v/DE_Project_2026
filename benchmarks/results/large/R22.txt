@@ -1,0 +1,57 @@
+=== R22 run 1 ===
+Limit  (cost=145692.19..145695.10 rows=25 width=34) (actual time=240.467..254.144 rows=25.00 loops=1)
+  Buffers: shared hit=13075 read=32769, temp read=15825 written=28733
+  ->  Gather Merge  (cost=139868.87..419535.75 rows=2401265 width=34) (actual time=236.806..253.255 rows=50025.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=13075 read=32769, temp read=15825 written=28733
+        ->  Sort  (cost=138868.84..141370.16 rows=1000527 width=34) (actual time=232.213..232.890 rows=17151.67 loops=3)
+              Sort Key: posted_at DESC
+              Sort Method: external merge  Disk: 39312kB
+              Buffers: shared hit=13075 read=32769, temp read=15825 written=28733
+              Worker 0:  Sort Method: external merge  Disk: 37264kB
+              Worker 1:  Sort Method: external merge  Disk: 38216kB
+              ->  Parallel Seq Scan on properties  (cost=0.00..55773.27 rows=1000527 width=34) (actual time=0.025..72.973 rows=800421.33 loops=3)
+                    Buffers: shared hit=12999 read=32769
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.165 ms
+Execution Time: 260.496 ms
+=== R22 run 2 ===
+Limit  (cost=145692.19..145695.10 rows=25 width=34) (actual time=239.315..252.582 rows=25.00 loops=1)
+  Buffers: shared hit=13357 read=32487, temp read=15825 written=28734
+  ->  Gather Merge  (cost=139868.87..419535.75 rows=2401265 width=34) (actual time=235.596..251.676 rows=50025.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=13357 read=32487, temp read=15825 written=28734
+        ->  Sort  (cost=138868.84..141370.16 rows=1000527 width=34) (actual time=232.021..232.730 rows=17237.33 loops=3)
+              Sort Key: posted_at DESC
+              Sort Method: external merge  Disk: 38352kB
+              Buffers: shared hit=13357 read=32487, temp read=15825 written=28734
+              Worker 0:  Sort Method: external merge  Disk: 37288kB
+              Worker 1:  Sort Method: external merge  Disk: 39152kB
+              ->  Parallel Seq Scan on properties  (cost=0.00..55773.27 rows=1000527 width=34) (actual time=0.028..72.803 rows=800421.33 loops=3)
+                    Buffers: shared hit=13281 read=32487
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.154 ms
+Execution Time: 258.960 ms
+=== R22 run 3 ===
+Limit  (cost=145692.19..145695.10 rows=25 width=34) (actual time=243.855..257.510 rows=25.00 loops=1)
+  Buffers: shared hit=13639 read=32205, temp read=15826 written=28735
+  ->  Gather Merge  (cost=139868.87..419535.75 rows=2401265 width=34) (actual time=240.263..256.621 rows=50025.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=13639 read=32205, temp read=15826 written=28735
+        ->  Sort  (cost=138868.84..141370.16 rows=1000527 width=34) (actual time=237.618..238.270 rows=17247.00 loops=3)
+              Sort Key: posted_at DESC
+              Sort Method: external merge  Disk: 39360kB
+              Buffers: shared hit=13639 read=32205, temp read=15826 written=28735
+              Worker 0:  Sort Method: external merge  Disk: 37880kB
+              Worker 1:  Sort Method: external merge  Disk: 37560kB
+              ->  Parallel Seq Scan on properties  (cost=0.00..55773.27 rows=1000527 width=34) (actual time=0.040..74.107 rows=800421.33 loops=3)
+                    Buffers: shared hit=13563 read=32205
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.164 ms
+Execution Time: 263.933 ms

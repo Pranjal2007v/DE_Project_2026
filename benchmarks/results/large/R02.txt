@@ -1,0 +1,93 @@
+=== R02 run 1 ===
+Limit  (cost=69437.60..69441.09 rows=30 width=55) (actual time=89.595..90.857 rows=30.00 loops=1)
+  Buffers: shared hit=12092 read=33693
+  ->  Gather Merge  (cost=69437.60..70093.31 rows=5630 width=55) (actual time=89.594..90.855 rows=30.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=12092 read=33693
+        ->  Sort  (cost=68437.58..68443.44 rows=2346 width=55) (actual time=88.023..88.024 rows=22.00 loops=3)
+              Sort Key: (round((p.price / (p.carpet_area_sqft)::numeric), 0))
+              Sort Method: top-N heapsort  Memory: 28kB
+              Buffers: shared hit=12092 read=33693
+              Worker 0:  Sort Method: top-N heapsort  Memory: 28kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 28kB
+              ->  Hash Join  (cost=2.38..68368.29 rows=2346 width=55) (actual time=0.402..87.899 rows=508.67 loops=3)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=12078 read=33693
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..68284.12 rows=23459 width=18) (actual time=0.082..87.217 rows=10930.67 loops=3)
+                          Filter: ((price < '12000000'::numeric) AND ((listing_type)::text = 'SALE'::text) AND ((status)::text = 'ACTIVE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (bhk = 3))
+                          Rows Removed by Filter: 789491
+                          Buffers: shared hit=12075 read=33693
+                    ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.023..0.023 rows=10.00 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=3
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.018..0.020 rows=10.00 loops=3)
+                                Filter: (city_id = 6)
+                                Rows Removed by Filter: 90
+                                Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.362 ms
+Execution Time: 90.883 ms
+=== R02 run 2 ===
+Limit  (cost=69437.60..69441.09 rows=30 width=55) (actual time=86.873..87.954 rows=30.00 loops=1)
+  Buffers: shared hit=12374 read=33411
+  ->  Gather Merge  (cost=69437.60..70093.31 rows=5630 width=55) (actual time=86.872..87.952 rows=30.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=12374 read=33411
+        ->  Sort  (cost=68437.58..68443.44 rows=2346 width=55) (actual time=85.414..85.415 rows=24.67 loops=3)
+              Sort Key: (round((p.price / (p.carpet_area_sqft)::numeric), 0))
+              Sort Method: top-N heapsort  Memory: 28kB
+              Buffers: shared hit=12374 read=33411
+              Worker 0:  Sort Method: top-N heapsort  Memory: 28kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 28kB
+              ->  Hash Join  (cost=2.38..68368.29 rows=2346 width=55) (actual time=0.405..85.315 rows=508.67 loops=3)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=12360 read=33411
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..68284.12 rows=23459 width=18) (actual time=0.070..84.684 rows=10930.67 loops=3)
+                          Filter: ((price < '12000000'::numeric) AND ((listing_type)::text = 'SALE'::text) AND ((status)::text = 'ACTIVE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (bhk = 3))
+                          Rows Removed by Filter: 789491
+                          Buffers: shared hit=12357 read=33411
+                    ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.020..0.020 rows=10.00 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=3
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.016..0.017 rows=10.00 loops=3)
+                                Filter: (city_id = 6)
+                                Rows Removed by Filter: 90
+                                Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.331 ms
+Execution Time: 87.978 ms
+=== R02 run 3 ===
+Limit  (cost=69437.60..69441.09 rows=30 width=55) (actual time=88.167..89.353 rows=30.00 loops=1)
+  Buffers: shared hit=12656 read=33129
+  ->  Gather Merge  (cost=69437.60..70093.31 rows=5630 width=55) (actual time=88.167..89.351 rows=30.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=12656 read=33129
+        ->  Sort  (cost=68437.58..68443.44 rows=2346 width=55) (actual time=86.828..86.829 rows=25.00 loops=3)
+              Sort Key: (round((p.price / (p.carpet_area_sqft)::numeric), 0))
+              Sort Method: top-N heapsort  Memory: 28kB
+              Buffers: shared hit=12656 read=33129
+              Worker 0:  Sort Method: top-N heapsort  Memory: 28kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 28kB
+              ->  Hash Join  (cost=2.38..68368.29 rows=2346 width=55) (actual time=0.569..86.717 rows=508.67 loops=3)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=12642 read=33129
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..68284.12 rows=23459 width=18) (actual time=0.071..86.063 rows=10930.67 loops=3)
+                          Filter: ((price < '12000000'::numeric) AND ((listing_type)::text = 'SALE'::text) AND ((status)::text = 'ACTIVE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (bhk = 3))
+                          Rows Removed by Filter: 789491
+                          Buffers: shared hit=12639 read=33129
+                    ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.020..0.020 rows=10.00 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=3
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.016..0.017 rows=10.00 loops=3)
+                                Filter: (city_id = 6)
+                                Rows Removed by Filter: 90
+                                Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.335 ms
+Execution Time: 89.382 ms

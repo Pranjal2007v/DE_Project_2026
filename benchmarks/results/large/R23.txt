@@ -1,0 +1,27 @@
+=== R23 run 1 ===
+Index Scan using uq_users_phone on users  (cost=0.42..8.44 rows=1 width=22) (actual time=0.575..0.575 rows=1.00 loops=1)
+  Index Cond: (phone = '9600001042'::bpchar)
+  Index Searches: 1
+  Buffers: shared read=4
+Planning:
+  Buffers: shared hit=117
+Planning Time: 0.276 ms
+Execution Time: 0.594 ms
+=== R23 run 2 ===
+Index Scan using uq_users_phone on users  (cost=0.42..8.44 rows=1 width=22) (actual time=0.010..0.011 rows=1.00 loops=1)
+  Index Cond: (phone = '9600001042'::bpchar)
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=117
+Planning Time: 0.225 ms
+Execution Time: 0.028 ms
+=== R23 run 3 ===
+Index Scan using uq_users_phone on users  (cost=0.42..8.44 rows=1 width=22) (actual time=0.010..0.010 rows=1.00 loops=1)
+  Index Cond: (phone = '9600001042'::bpchar)
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=117
+Planning Time: 0.217 ms
+Execution Time: 0.026 ms

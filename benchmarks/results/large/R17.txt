@@ -1,0 +1,81 @@
+=== R17 run 1 ===
+Gather Merge  (cost=123229.66..163272.94 rows=343818 width=16) (actual time=283.774..296.685 rows=177312.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=10996 read=52140, temp read=7706 written=7773
+  ->  Sort  (cost=122229.64..122587.79 rows=143258 width=16) (actual time=277.467..279.077 rows=59104.00 loops=3)
+        Sort Key: p.posted_at
+        Sort Method: external merge  Disk: 2272kB
+        Buffers: shared hit=10996 read=52140, temp read=7706 written=7773
+        Worker 0:  Sort Method: quicksort  Memory: 2913kB
+        Worker 1:  Sort Method: quicksort  Memory: 2928kB
+        ->  Parallel Hash Right Anti Join  (cost=67754.33..107510.84 rows=143258 width=16) (actual time=244.681..270.950 rows=59104.00 loops=3)
+              Hash Cond: (e.property_id = p.property_id)
+              Buffers: shared hit=10980 read=52140, temp read=7422 written=7488
+              ->  Parallel Seq Scan on enquiries e  (cost=0.00..25685.33 rows=833333 width=4) (actual time=0.651..94.955 rows=666666.67 loops=3)
+                    Buffers: shared hit=801 read=16551
+              ->  Parallel Hash  (cost=63277.22..63277.22 rows=257529 width=16) (actual time=91.281..91.282 rows=133302.33 loops=3)
+                    Buckets: 262144  Batches: 8  Memory Usage: 4448kB
+                    Buffers: shared hit=10179 read=35589, temp written=1576
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..63277.22 rows=257529 width=16) (actual time=0.033..79.434 rows=133302.33 loops=3)
+                          Filter: (((status)::text = 'ACTIVE'::text) AND (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '90 days'::interval)))
+                          Rows Removed by Filter: 667119
+                          Buffers: shared hit=10179 read=35589
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.344 ms
+Execution Time: 300.705 ms
+=== R17 run 2 ===
+Gather Merge  (cost=123229.66..163272.94 rows=343818 width=16) (actual time=201.439..213.587 rows=177312.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=11560 read=51576, temp read=7423 written=7488
+  ->  Sort  (cost=122229.64..122587.79 rows=143258 width=16) (actual time=197.908..199.488 rows=59104.00 loops=3)
+        Sort Key: p.posted_at
+        Sort Method: quicksort  Memory: 2913kB
+        Buffers: shared hit=11560 read=51576, temp read=7423 written=7488
+        Worker 0:  Sort Method: quicksort  Memory: 3842kB
+        Worker 1:  Sort Method: quicksort  Memory: 3834kB
+        ->  Parallel Hash Right Anti Join  (cost=67754.33..107510.84 rows=143258 width=16) (actual time=169.101..192.178 rows=59104.00 loops=3)
+              Hash Cond: (e.property_id = p.property_id)
+              Buffers: shared hit=11544 read=51576, temp read=7423 written=7488
+              ->  Parallel Seq Scan on enquiries e  (cost=0.00..25685.33 rows=833333 width=4) (actual time=0.054..24.985 rows=666666.67 loops=3)
+                    Buffers: shared hit=1083 read=16269
+              ->  Parallel Hash  (cost=63277.22..63277.22 rows=257529 width=16) (actual time=89.660..89.660 rows=133302.33 loops=3)
+                    Buckets: 262144  Batches: 8  Memory Usage: 4480kB
+                    Buffers: shared hit=10461 read=35307, temp written=1580
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..63277.22 rows=257529 width=16) (actual time=0.035..79.538 rows=133302.33 loops=3)
+                          Filter: (((status)::text = 'ACTIVE'::text) AND (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '90 days'::interval)))
+                          Rows Removed by Filter: 667119
+                          Buffers: shared hit=10461 read=35307
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.352 ms
+Execution Time: 217.109 ms
+=== R17 run 3 ===
+Gather Merge  (cost=123229.66..163272.94 rows=343818 width=16) (actual time=202.145..213.226 rows=177312.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=12124 read=51012, temp read=7422 written=7492
+  ->  Sort  (cost=122229.64..122587.79 rows=143258 width=16) (actual time=198.447..199.955 rows=59104.00 loops=3)
+        Sort Key: p.posted_at
+        Sort Method: quicksort  Memory: 3838kB
+        Buffers: shared hit=12124 read=51012, temp read=7422 written=7492
+        Worker 0:  Sort Method: quicksort  Memory: 3838kB
+        Worker 1:  Sort Method: quicksort  Memory: 2913kB
+        ->  Parallel Hash Right Anti Join  (cost=67754.33..107510.84 rows=143258 width=16) (actual time=168.745..192.751 rows=59104.00 loops=3)
+              Hash Cond: (e.property_id = p.property_id)
+              Buffers: shared hit=12108 read=51012, temp read=7422 written=7492
+              ->  Parallel Seq Scan on enquiries e  (cost=0.00..25685.33 rows=833333 width=4) (actual time=0.056..23.880 rows=666666.67 loops=3)
+                    Buffers: shared hit=1365 read=15987
+              ->  Parallel Hash  (cost=63277.22..63277.22 rows=257529 width=16) (actual time=90.635..90.635 rows=133302.33 loops=3)
+                    Buckets: 262144  Batches: 8  Memory Usage: 4448kB
+                    Buffers: shared hit=10743 read=35025, temp written=1592
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..63277.22 rows=257529 width=16) (actual time=0.027..80.113 rows=133302.33 loops=3)
+                          Filter: (((status)::text = 'ACTIVE'::text) AND (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '90 days'::interval)))
+                          Rows Removed by Filter: 667119
+                          Buffers: shared hit=10743 read=35025
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.316 ms
+Execution Time: 216.522 ms

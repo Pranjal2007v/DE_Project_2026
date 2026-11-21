@@ -1,0 +1,90 @@
+=== R07 run 1 ===
+Sort  (cost=22023.21..22023.22 rows=1 width=39) (actual time=20.023..20.877 rows=0.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=7065 read=5928 written=128
+  ->  Nested Loop  (cost=1000.85..22023.20 rows=1 width=39) (actual time=20.017..20.871 rows=0.00 loops=1)
+        Buffers: shared hit=7062 read=5928 written=128
+        ->  Gather  (cost=1000.43..22017.18 rows=1 width=20) (actual time=20.017..20.871 rows=0.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=7062 read=5928 written=128
+              ->  Nested Loop  (cost=0.43..21017.08 rows=1 width=20) (actual time=18.544..18.545 rows=0.00 loops=3)
+                    Buffers: shared hit=7062 read=5928 written=128
+                    ->  Parallel Seq Scan on site_visits v  (cost=0.00..10139.34 rows=1457 width=20) (actual time=0.085..16.132 rows=601.67 loops=3)
+                          Filter: (date(scheduled_at) = '2026-07-01'::date)
+                          Rows Removed by Filter: 232537
+                          Buffers: shared hit=846 read=4922
+                    ->  Index Scan using properties_pkey on properties p  (cost=0.43..7.47 rows=1 width=4) (actual time=0.004..0.004 rows=0.00 loops=1805)
+                          Index Cond: (property_id = v.property_id)
+                          Filter: (listed_by = 4723)
+                          Rows Removed by Filter: 1
+                          Index Searches: 1805
+                          Buffers: shared hit=6216 read=1006 written=128
+        ->  Index Scan using users_pkey on users u  (cost=0.42..6.02 rows=1 width=27) (never executed)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 0
+Planning:
+  Buffers: shared hit=331 read=12 dirtied=1
+Planning Time: 0.551 ms
+Execution Time: 20.910 ms
+=== R07 run 2 ===
+Sort  (cost=22023.21..22023.22 rows=1 width=39) (actual time=19.396..20.193 rows=0.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=8353 read=4640 written=48
+  ->  Nested Loop  (cost=1000.85..22023.20 rows=1 width=39) (actual time=19.391..20.188 rows=0.00 loops=1)
+        Buffers: shared hit=8350 read=4640 written=48
+        ->  Gather  (cost=1000.43..22017.18 rows=1 width=20) (actual time=19.391..20.187 rows=0.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=8350 read=4640 written=48
+              ->  Nested Loop  (cost=0.43..21017.08 rows=1 width=20) (actual time=17.819..17.819 rows=0.00 loops=3)
+                    Buffers: shared hit=8350 read=4640 written=48
+                    ->  Parallel Seq Scan on site_visits v  (cost=0.00..10139.34 rows=1457 width=20) (actual time=0.079..16.169 rows=601.67 loops=3)
+                          Filter: (date(scheduled_at) = '2026-07-01'::date)
+                          Rows Removed by Filter: 232537
+                          Buffers: shared hit=1128 read=4640 written=48
+                    ->  Index Scan using properties_pkey on properties p  (cost=0.43..7.47 rows=1 width=4) (actual time=0.003..0.003 rows=0.00 loops=1805)
+                          Index Cond: (property_id = v.property_id)
+                          Filter: (listed_by = 4723)
+                          Rows Removed by Filter: 1
+                          Index Searches: 1805
+                          Buffers: shared hit=7222
+        ->  Index Scan using users_pkey on users u  (cost=0.42..6.02 rows=1 width=27) (never executed)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 0
+Planning:
+  Buffers: shared hit=343
+Planning Time: 0.435 ms
+Execution Time: 20.223 ms
+=== R07 run 3 ===
+Sort  (cost=22023.21..22023.22 rows=1 width=39) (actual time=19.298..20.085 rows=0.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=8635 read=4358
+  ->  Nested Loop  (cost=1000.85..22023.20 rows=1 width=39) (actual time=19.293..20.079 rows=0.00 loops=1)
+        Buffers: shared hit=8632 read=4358
+        ->  Gather  (cost=1000.43..22017.18 rows=1 width=20) (actual time=19.293..20.079 rows=0.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=8632 read=4358
+              ->  Nested Loop  (cost=0.43..21017.08 rows=1 width=20) (actual time=17.870..17.871 rows=0.00 loops=3)
+                    Buffers: shared hit=8632 read=4358
+                    ->  Parallel Seq Scan on site_visits v  (cost=0.00..10139.34 rows=1457 width=20) (actual time=0.105..16.229 rows=601.67 loops=3)
+                          Filter: (date(scheduled_at) = '2026-07-01'::date)
+                          Rows Removed by Filter: 232537
+                          Buffers: shared hit=1410 read=4358
+                    ->  Index Scan using properties_pkey on properties p  (cost=0.43..7.47 rows=1 width=4) (actual time=0.003..0.003 rows=0.00 loops=1805)
+                          Index Cond: (property_id = v.property_id)
+                          Filter: (listed_by = 4723)
+                          Rows Removed by Filter: 1
+                          Index Searches: 1805
+                          Buffers: shared hit=7222
+        ->  Index Scan using users_pkey on users u  (cost=0.42..6.02 rows=1 width=27) (never executed)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 0
+Planning:
+  Buffers: shared hit=343
+Planning Time: 0.434 ms
+Execution Time: 20.115 ms
