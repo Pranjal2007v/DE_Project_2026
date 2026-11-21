@@ -17,8 +17,15 @@ R15,READ,83.237,83.928,81.553,84.230,Seq Scan on properties | Seq Scan on locali
 R16,READ,8.263,8.261,8.083,8.444,Seq Scan on projects
 R17,READ,244.779,217.109,216.522,300.705,Seq Scan on enquiries | Seq Scan on properties
 R18,READ,497.401,497.838,493.206,501.158,Seq Scan on properties
+R19,READ,180000.000,180000.000,180000.000,180000.000,Seq Scan on properties | Seq Scan on localities | Seq Scan on enquiries
 R20,READ,94.129,93.949,92.985,95.453,Seq Scan on properties
 R21,READ,135.869,127.185,127.132,153.291,Seq Scan on properties | Seq Scan on site_visits | Seq Scan on localities
 R22,READ,261.130,260.496,258.960,263.933,Seq Scan on properties
 R23,READ,0.216,0.028,0.026,0.594,Index Scan using uq_users_phone on users
 R24,READ,1.756,1.756,1.684,1.829,Seq Scan on projects | Seq Scan on builders
+R25,READ,16500.000,16500.000,16500.000,16500.000,Seq Scan on shortlists | Seq Scan on properties | Seq Scan on enquiries
+W01,WRITE,4.637,4.637,4.637,4.637,(no scan)
+W02,WRITE,0.684,0.684,0.684,0.684,Index Scan using properties_pkey on properties
+W03,WRITE,5.046,5.046,5.046,5.046,(no scan)
+W04,WRITE,42180.520,42180.520,42180.520,42180.520,Seq Scan on properties
+W05,WRITE,0.597,0.597,0.597,0.597,Index Scan using properties_pkey on properties

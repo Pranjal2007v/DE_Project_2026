@@ -1,0 +1,126 @@
+=== R15 run 1 ===
+Sort  (cost=63324.21..63324.24 rows=10 width=105) (actual time=153.040..153.619 rows=10.00 loops=1)
+  Sort Key: (round((('1200'::numeric * avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'RENT'::text))) / avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'SALE'::text))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=22 read=45768
+  ->  Finalize GroupAggregate  (cost=63320.65..63324.05 rows=10 width=105) (actual time=152.989..153.608 rows=10.00 loops=1)
+        Group Key: l.locality_name
+        Buffers: shared hit=19 read=45768
+        ->  Gather Merge  (cost=63320.65..63323.45 rows=24 width=73) (actual time=152.977..153.562 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=19 read=45768
+              ->  Sort  (cost=62320.63..62320.65 rows=10 width=73) (actual time=150.099..150.100 rows=10.00 loops=3)
+                    Sort Key: l.locality_name
+                    Sort Method: quicksort  Memory: 26kB
+                    Buffers: shared hit=19 read=45768
+                    Worker 0:  Sort Method: quicksort  Memory: 26kB
+                    Worker 1:  Sort Method: quicksort  Memory: 26kB
+                    ->  Partial HashAggregate  (cost=62320.31..62320.46 rows=10 width=73) (actual time=150.066..150.070 rows=10.00 loops=3)
+                          Group Key: l.locality_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=3 read=45768
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=2.38..60495.90 rows=81085 width=24) (actual time=0.111..127.845 rows=65051.67 loops=3)
+                                Hash Cond: (p.locality_id = l.locality_id)
+                                Buffers: shared hit=3 read=45768
+                                ->  Parallel Seq Scan on properties p  (cost=0.00..58274.85 rows=810845 width=19) (actual time=0.062..87.413 rows=650634.67 loops=3)
+                                      Filter: ((property_type)::text = 'APARTMENT'::text)
+                                      Rows Removed by Filter: 149787
+                                      Buffers: shared read=45768
+                                ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.040..0.040 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.030..0.035 rows=10.00 loops=3)
+                                            Filter: (city_id = 1)
+                                            Rows Removed by Filter: 90
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=530 read=12
+Planning Time: 1.628 ms
+Execution Time: 153.688 ms
+=== R15 run 2 ===
+Sort  (cost=63324.21..63324.24 rows=10 width=105) (actual time=147.269..148.400 rows=10.00 loops=1)
+  Sort Key: (round((('1200'::numeric * avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'RENT'::text))) / avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'SALE'::text))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=306 read=45484
+  ->  Finalize GroupAggregate  (cost=63320.65..63324.05 rows=10 width=105) (actual time=147.223..148.385 rows=10.00 loops=1)
+        Group Key: l.locality_name
+        Buffers: shared hit=303 read=45484
+        ->  Gather Merge  (cost=63320.65..63323.45 rows=24 width=73) (actual time=147.203..148.341 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=303 read=45484
+              ->  Sort  (cost=62320.63..62320.65 rows=10 width=73) (actual time=144.692..144.694 rows=10.00 loops=3)
+                    Sort Key: l.locality_name
+                    Sort Method: quicksort  Memory: 26kB
+                    Buffers: shared hit=303 read=45484
+                    Worker 0:  Sort Method: quicksort  Memory: 26kB
+                    Worker 1:  Sort Method: quicksort  Memory: 26kB
+                    ->  Partial HashAggregate  (cost=62320.31..62320.46 rows=10 width=73) (actual time=144.655..144.659 rows=10.00 loops=3)
+                          Group Key: l.locality_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=287 read=45484
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=2.38..60495.90 rows=81085 width=24) (actual time=0.132..122.617 rows=65051.67 loops=3)
+                                Hash Cond: (p.locality_id = l.locality_id)
+                                Buffers: shared hit=287 read=45484
+                                ->  Parallel Seq Scan on properties p  (cost=0.00..58274.85 rows=810845 width=19) (actual time=0.085..83.253 rows=650634.67 loops=3)
+                                      Filter: ((property_type)::text = 'APARTMENT'::text)
+                                      Rows Removed by Filter: 149787
+                                      Buffers: shared hit=284 read=45484
+                                ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.035..0.035 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.025..0.030 rows=10.00 loops=3)
+                                            Filter: (city_id = 1)
+                                            Rows Removed by Filter: 90
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=542
+Planning Time: 1.309 ms
+Execution Time: 148.465 ms
+=== R15 run 3 ===
+Sort  (cost=63324.21..63324.24 rows=10 width=105) (actual time=148.133..149.327 rows=10.00 loops=1)
+  Sort Key: (round((('1200'::numeric * avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'RENT'::text))) / avg((p.price / (p.carpet_area_sqft)::numeric)) FILTER (WHERE ((p.listing_type)::text = 'SALE'::text))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=589 read=45201
+  ->  Finalize GroupAggregate  (cost=63320.65..63324.05 rows=10 width=105) (actual time=148.065..149.316 rows=10.00 loops=1)
+        Group Key: l.locality_name
+        Buffers: shared hit=586 read=45201
+        ->  Gather Merge  (cost=63320.65..63323.45 rows=24 width=73) (actual time=148.052..149.253 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=586 read=45201
+              ->  Sort  (cost=62320.63..62320.65 rows=10 width=73) (actual time=145.596..145.597 rows=10.00 loops=3)
+                    Sort Key: l.locality_name
+                    Sort Method: quicksort  Memory: 26kB
+                    Buffers: shared hit=586 read=45201
+                    Worker 0:  Sort Method: quicksort  Memory: 26kB
+                    Worker 1:  Sort Method: quicksort  Memory: 26kB
+                    ->  Partial HashAggregate  (cost=62320.31..62320.46 rows=10 width=73) (actual time=145.562..145.566 rows=10.00 loops=3)
+                          Group Key: l.locality_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=570 read=45201
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=2.38..60495.90 rows=81085 width=24) (actual time=0.109..123.764 rows=65051.67 loops=3)
+                                Hash Cond: (p.locality_id = l.locality_id)
+                                Buffers: shared hit=570 read=45201
+                                ->  Parallel Seq Scan on properties p  (cost=0.00..58274.85 rows=810845 width=19) (actual time=0.066..84.133 rows=650634.67 loops=3)
+                                      Filter: ((property_type)::text = 'APARTMENT'::text)
+                                      Rows Removed by Filter: 149787
+                                      Buffers: shared hit=567 read=45201
+                                ->  Hash  (cost=2.25..2.25 rows=10 width=13) (actual time=0.035..0.035 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on localities l  (cost=0.00..2.25 rows=10 width=13) (actual time=0.025..0.029 rows=10.00 loops=3)
+                                            Filter: (city_id = 1)
+                                            Rows Removed by Filter: 90
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=542
+Planning Time: 1.308 ms
+Execution Time: 149.393 ms

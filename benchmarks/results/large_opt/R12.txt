@@ -1,0 +1,84 @@
+=== R12 run 1 ===
+Gather Merge  (cost=18595.56..26631.39 rows=68997 width=20) (actual time=42.223..46.715 rows=75115.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=20 read=6341, temp read=313 written=314
+  ->  Sort  (cost=17595.53..17667.40 rows=28749 width=20) (actual time=31.106..31.868 rows=25038.33 loops=3)
+        Sort Key: e.created_at
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=20 read=6341, temp read=313 written=314
+        Worker 0:  Sort Method: external merge  Disk: 2504kB
+        Worker 1:  Sort Method: quicksort  Memory: 25kB
+        ->  Parallel Hash Right Anti Join  (cost=4598.58..15466.49 rows=28749 width=20) (actual time=26.609..27.926 rows=25038.33 loops=3)
+              Hash Cond: ((v.property_id = e.property_id) AND (v.user_id = e.user_id))
+              Buffers: shared hit=4 read=6341
+              ->  Parallel Seq Scan on site_visits v  (cost=0.00..8682.23 rows=291423 width=8) (actual time=0.038..6.092 rows=233138.33 loops=3)
+                    Buffers: shared read=5768
+              ->  Parallel Hash  (cost=3890.16..3890.16 rows=47228 width=20) (actual time=4.438..4.439 rows=38576.67 loops=3)
+                    Buckets: 131072  Batches: 1  Memory Usage: 7392kB
+                    Buffers: shared hit=4 read=573
+                    ->  Parallel Index Only Scan using idx_enq_created_at on enquiries e  (cost=0.43..3890.16 rows=47228 width=20) (actual time=0.044..2.187 rows=38576.67 loops=3)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-06-24 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=4 read=573
+Planning:
+  Buffers: shared hit=300 read=35
+Planning Time: 1.245 ms
+Execution Time: 48.164 ms
+=== R12 run 2 ===
+Gather Merge  (cost=18595.56..26631.39 rows=68997 width=20) (actual time=41.117..45.939 rows=75115.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=875 read=5486, temp read=313 written=314
+  ->  Sort  (cost=17595.53..17667.40 rows=28749 width=20) (actual time=30.773..31.552 rows=25038.33 loops=3)
+        Sort Key: e.created_at
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=875 read=5486, temp read=313 written=314
+        Worker 0:  Sort Method: external merge  Disk: 2504kB
+        Worker 1:  Sort Method: quicksort  Memory: 25kB
+        ->  Parallel Hash Right Anti Join  (cost=4598.58..15466.49 rows=28749 width=20) (actual time=26.330..27.660 rows=25038.33 loops=3)
+              Hash Cond: ((v.property_id = e.property_id) AND (v.user_id = e.user_id))
+              Buffers: shared hit=859 read=5486
+              ->  Parallel Seq Scan on site_visits v  (cost=0.00..8682.23 rows=291423 width=8) (actual time=0.046..6.221 rows=233138.33 loops=3)
+                    Buffers: shared hit=282 read=5486
+              ->  Parallel Hash  (cost=3890.16..3890.16 rows=47228 width=20) (actual time=4.022..4.022 rows=38576.67 loops=3)
+                    Buckets: 131072  Batches: 1  Memory Usage: 7424kB
+                    Buffers: shared hit=577
+                    ->  Parallel Index Only Scan using idx_enq_created_at on enquiries e  (cost=0.43..3890.16 rows=47228 width=20) (actual time=0.018..1.824 rows=38576.67 loops=3)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-06-24 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=577
+Planning:
+  Buffers: shared hit=335
+Planning Time: 0.501 ms
+Execution Time: 47.397 ms
+=== R12 run 3 ===
+Gather Merge  (cost=18595.56..26631.39 rows=68997 width=20) (actual time=41.665..46.272 rows=75115.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=1157 read=5204, temp read=313 written=314
+  ->  Sort  (cost=17595.53..17667.40 rows=28749 width=20) (actual time=31.169..31.838 rows=25038.33 loops=3)
+        Sort Key: e.created_at
+        Sort Method: external merge  Disk: 2504kB
+        Buffers: shared hit=1157 read=5204, temp read=313 written=314
+        Worker 0:  Sort Method: quicksort  Memory: 25kB
+        Worker 1:  Sort Method: quicksort  Memory: 25kB
+        ->  Parallel Hash Right Anti Join  (cost=4598.58..15466.49 rows=28749 width=20) (actual time=26.655..27.961 rows=25038.33 loops=3)
+              Hash Cond: ((v.property_id = e.property_id) AND (v.user_id = e.user_id))
+              Buffers: shared hit=1141 read=5204
+              ->  Parallel Seq Scan on site_visits v  (cost=0.00..8682.23 rows=291423 width=8) (actual time=0.044..6.505 rows=233138.33 loops=3)
+                    Buffers: shared hit=564 read=5204
+              ->  Parallel Hash  (cost=3890.16..3890.16 rows=47228 width=20) (actual time=4.143..4.144 rows=38576.67 loops=3)
+                    Buckets: 131072  Batches: 1  Memory Usage: 7424kB
+                    Buffers: shared hit=577
+                    ->  Parallel Index Only Scan using idx_enq_created_at on enquiries e  (cost=0.43..3890.16 rows=47228 width=20) (actual time=0.019..1.893 rows=38576.67 loops=3)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-06-24 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=577
+Planning:
+  Buffers: shared hit=335
+Planning Time: 0.530 ms
+Execution Time: 48.113 ms

@@ -1,0 +1,99 @@
+=== R08 run 1 ===
+Gather Merge  (cost=32069.86..32370.22 rows=2579 width=48) (actual time=43.647..45.288 rows=11090.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=335049 read=6220
+  ->  Sort  (cost=31069.83..31072.52 rows=1075 width=48) (actual time=42.178..42.254 rows=3696.67 loops=3)
+        Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+        Sort Method: quicksort  Memory: 256kB
+        Buffers: shared hit=335049 read=6220
+        Worker 0:  Sort Method: quicksort  Memory: 257kB
+        Worker 1:  Sort Method: quicksort  Memory: 251kB
+        ->  Parallel Hash Join  (cost=1136.37..31015.70 rows=1075 width=48) (actual time=1.370..41.525 rows=3696.67 loops=3)
+              Hash Cond: (p.property_id = c.property_id)
+              Buffers: shared hit=335035 read=6220
+              ->  Parallel Index Only Scan using idx_prop_map on properties p  (cost=0.43..28742.08 rows=298830 width=4) (actual time=0.061..28.672 rows=245574.00 loops=3)
+                    Index Cond: (status = 'ACTIVE'::text)
+                    Heap Fetches: 0
+                    Index Searches: 3
+                    Buffers: shared hit=335032 read=6073
+              ->  Parallel Hash  (cost=1072.45..1072.45 rows=5079 width=16) (actual time=1.277..1.278 rows=4349.00 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 864kB
+                    Buffers: shared hit=3 read=147
+                    ->  Parallel Index Only Scan using idx_pc_changed_at on price_changes c  (cost=0.42..1072.45 rows=5079 width=16) (actual time=0.046..0.985 rows=4349.00 loops=3)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Filter: (new_price <= (old_price * 0.9))
+                          Rows Removed by Filter: 4296
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=3 read=147
+Planning:
+  Buffers: shared hit=548 read=8
+Planning Time: 1.552 ms
+Execution Time: 45.529 ms
+=== R08 run 2 ===
+Gather Merge  (cost=32069.86..32370.22 rows=2579 width=48) (actual time=39.808..41.258 rows=11090.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=341233
+  ->  Sort  (cost=31069.83..31072.52 rows=1075 width=48) (actual time=38.358..38.434 rows=3696.67 loops=3)
+        Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+        Sort Method: quicksort  Memory: 255kB
+        Buffers: shared hit=341233
+        Worker 0:  Sort Method: quicksort  Memory: 251kB
+        Worker 1:  Sort Method: quicksort  Memory: 258kB
+        ->  Parallel Hash Join  (cost=1136.37..31015.70 rows=1075 width=48) (actual time=1.190..37.753 rows=3696.67 loops=3)
+              Hash Cond: (p.property_id = c.property_id)
+              Buffers: shared hit=341219
+              ->  Parallel Index Only Scan using idx_prop_map on properties p  (cost=0.43..28742.08 rows=298830 width=4) (actual time=0.036..25.469 rows=245574.00 loops=3)
+                    Index Cond: (status = 'ACTIVE'::text)
+                    Heap Fetches: 0
+                    Index Searches: 3
+                    Buffers: shared hit=341069
+              ->  Parallel Hash  (cost=1072.45..1072.45 rows=5079 width=16) (actual time=1.117..1.117 rows=4349.00 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 832kB
+                    Buffers: shared hit=150
+                    ->  Parallel Index Only Scan using idx_pc_changed_at on price_changes c  (cost=0.42..1072.45 rows=5079 width=16) (actual time=0.022..0.841 rows=4349.00 loops=3)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Filter: (new_price <= (old_price * 0.9))
+                          Rows Removed by Filter: 4296
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=150
+Planning:
+  Buffers: shared hit=556
+Planning Time: 0.721 ms
+Execution Time: 41.488 ms
+=== R08 run 3 ===
+Gather Merge  (cost=32069.86..32370.22 rows=2579 width=48) (actual time=40.905..42.572 rows=11090.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=341267
+  ->  Sort  (cost=31069.83..31072.52 rows=1075 width=48) (actual time=39.404..39.479 rows=3696.67 loops=3)
+        Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+        Sort Method: quicksort  Memory: 251kB
+        Buffers: shared hit=341267
+        Worker 0:  Sort Method: quicksort  Memory: 255kB
+        Worker 1:  Sort Method: quicksort  Memory: 259kB
+        ->  Parallel Hash Join  (cost=1136.37..31015.70 rows=1075 width=48) (actual time=1.232..38.757 rows=3696.67 loops=3)
+              Hash Cond: (p.property_id = c.property_id)
+              Buffers: shared hit=341253
+              ->  Parallel Index Only Scan using idx_prop_map on properties p  (cost=0.43..28742.08 rows=298830 width=4) (actual time=0.036..26.226 rows=245574.00 loops=3)
+                    Index Cond: (status = 'ACTIVE'::text)
+                    Heap Fetches: 0
+                    Index Searches: 3
+                    Buffers: shared hit=341103
+              ->  Parallel Hash  (cost=1072.45..1072.45 rows=5079 width=16) (actual time=1.157..1.158 rows=4349.00 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 832kB
+                    Buffers: shared hit=150
+                    ->  Parallel Index Only Scan using idx_pc_changed_at on price_changes c  (cost=0.42..1072.45 rows=5079 width=16) (actual time=0.022..0.884 rows=4349.00 loops=3)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Filter: (new_price <= (old_price * 0.9))
+                          Rows Removed by Filter: 4296
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=150
+Planning:
+  Buffers: shared hit=556
+Planning Time: 0.735 ms
+Execution Time: 42.805 ms

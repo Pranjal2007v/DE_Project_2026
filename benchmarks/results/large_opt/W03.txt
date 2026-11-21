@@ -1,0 +1,30 @@
+=== W03 run 1 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=1.877..1.878 rows=0.00 loops=1)
+  Buffers: shared hit=86 read=17 dirtied=5
+  ->  Result  (cost=0.00..0.01 rows=1 width=60) (actual time=0.003..0.003 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.064 ms
+Trigger for constraint fk_sv_property: time=1.385 calls=1
+Trigger for constraint fk_sv_user: time=0.345 calls=1
+Execution Time: 3.629 ms
+=== W03 run 2 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=0.329..0.329 rows=0.00 loops=1)
+  Buffers: shared hit=102 read=1 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=60) (actual time=0.003..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.077 ms
+Trigger for constraint fk_sv_property: time=1.229 calls=1
+Trigger for constraint fk_sv_user: time=0.369 calls=1
+Execution Time: 1.946 ms
+=== W03 run 3 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=0.346..0.347 rows=0.00 loops=1)
+  Buffers: shared hit=102 read=1 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=60) (actual time=0.004..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.061 ms
+Trigger for constraint fk_sv_property: time=1.127 calls=1
+Trigger for constraint fk_sv_user: time=0.327 calls=1
+Execution Time: 1.820 ms

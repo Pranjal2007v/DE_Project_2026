@@ -1,0 +1,42 @@
+=== R13 run 1 ===
+Nested Loop Anti Join  (cost=0.43..12344.55 rows=2945 width=39) (actual time=28.707..30.445 rows=2400.00 loops=1)
+  Buffers: shared hit=70876 read=1469
+  ->  Seq Scan on projects pj  (cost=0.00..584.00 rows=24000 width=39) (actual time=0.042..1.944 rows=24000.00 loops=1)
+        Buffers: shared read=344
+  ->  Index Only Scan using idx_properties_project_id on properties p  (cost=0.43..1.88 rows=63 width=4) (actual time=0.001..0.001 rows=0.90 loops=24000)
+        Index Cond: (project_id = pj.project_id)
+        Heap Fetches: 0
+        Index Searches: 24000
+        Buffers: shared hit=70876 read=1125
+Planning:
+  Buffers: shared hit=440 read=67
+Planning Time: 3.487 ms
+Execution Time: 30.578 ms
+=== R13 run 2 ===
+Nested Loop Anti Join  (cost=0.43..12344.55 rows=2945 width=39) (actual time=22.058..23.798 rows=2400.00 loops=1)
+  Buffers: shared hit=72345
+  ->  Seq Scan on projects pj  (cost=0.00..584.00 rows=24000 width=39) (actual time=0.007..1.668 rows=24000.00 loops=1)
+        Buffers: shared hit=344
+  ->  Index Only Scan using idx_properties_project_id on properties p  (cost=0.43..1.88 rows=63 width=4) (actual time=0.001..0.001 rows=0.90 loops=24000)
+        Index Cond: (project_id = pj.project_id)
+        Heap Fetches: 0
+        Index Searches: 24000
+        Buffers: shared hit=72001
+Planning:
+  Buffers: shared hit=507
+Planning Time: 1.326 ms
+Execution Time: 23.930 ms
+=== R13 run 3 ===
+Nested Loop Anti Join  (cost=0.43..12344.55 rows=2945 width=39) (actual time=22.964..24.706 rows=2400.00 loops=1)
+  Buffers: shared hit=72345
+  ->  Seq Scan on projects pj  (cost=0.00..584.00 rows=24000 width=39) (actual time=0.008..1.721 rows=24000.00 loops=1)
+        Buffers: shared hit=344
+  ->  Index Only Scan using idx_properties_project_id on properties p  (cost=0.43..1.88 rows=63 width=4) (actual time=0.001..0.001 rows=0.90 loops=24000)
+        Index Cond: (project_id = pj.project_id)
+        Heap Fetches: 0
+        Index Searches: 24000
+        Buffers: shared hit=72001
+Planning:
+  Buffers: shared hit=507
+Planning Time: 1.528 ms
+Execution Time: 24.843 ms

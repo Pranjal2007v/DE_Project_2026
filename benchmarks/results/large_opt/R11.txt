@@ -1,0 +1,66 @@
+=== R11 run 1 ===
+GroupAggregate  (cost=251.24..251.62 rows=9 width=79) (actual time=0.220..0.224 rows=9.00 loops=1)
+  Group Key: bhk, listing_type
+  Buffers: shared hit=30 read=41
+  ->  Sort  (cost=251.24..251.29 rows=19 width=13) (actual time=0.213..0.214 rows=18.00 loops=1)
+        Sort Key: bhk, listing_type
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=30 read=41
+        ->  Bitmap Heap Scan on properties  (cost=4.91..250.84 rows=19 width=13) (actual time=0.024..0.195 rows=18.00 loops=1)
+              Recheck Cond: (project_id = 217)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 44
+              Heap Blocks: exact=62
+              Buffers: shared hit=24 read=41
+              ->  Bitmap Index Scan on idx_properties_project_id  (cost=0.00..4.90 rows=63 width=0) (actual time=0.012..0.012 rows=62.00 loops=1)
+                    Index Cond: (project_id = 217)
+                    Index Searches: 1
+                    Buffers: shared hit=2 read=1
+Planning:
+  Buffers: shared hit=382 read=29
+Planning Time: 0.723 ms
+Execution Time: 0.255 ms
+=== R11 run 2 ===
+GroupAggregate  (cost=251.24..251.62 rows=9 width=79) (actual time=0.124..0.128 rows=9.00 loops=1)
+  Group Key: bhk, listing_type
+  Buffers: shared hit=71
+  ->  Sort  (cost=251.24..251.29 rows=19 width=13) (actual time=0.118..0.118 rows=18.00 loops=1)
+        Sort Key: bhk, listing_type
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=71
+        ->  Bitmap Heap Scan on properties  (cost=4.91..250.84 rows=19 width=13) (actual time=0.024..0.101 rows=18.00 loops=1)
+              Recheck Cond: (project_id = 217)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 44
+              Heap Blocks: exact=62
+              Buffers: shared hit=65
+              ->  Bitmap Index Scan on idx_properties_project_id  (cost=0.00..4.90 rows=63 width=0) (actual time=0.009..0.009 rows=62.00 loops=1)
+                    Index Cond: (project_id = 217)
+                    Index Searches: 1
+                    Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=411
+Planning Time: 0.569 ms
+Execution Time: 0.159 ms
+=== R11 run 3 ===
+GroupAggregate  (cost=251.24..251.62 rows=9 width=79) (actual time=0.124..0.127 rows=9.00 loops=1)
+  Group Key: bhk, listing_type
+  Buffers: shared hit=71
+  ->  Sort  (cost=251.24..251.29 rows=19 width=13) (actual time=0.118..0.118 rows=18.00 loops=1)
+        Sort Key: bhk, listing_type
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=71
+        ->  Bitmap Heap Scan on properties  (cost=4.91..250.84 rows=19 width=13) (actual time=0.022..0.102 rows=18.00 loops=1)
+              Recheck Cond: (project_id = 217)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 44
+              Heap Blocks: exact=62
+              Buffers: shared hit=65
+              ->  Bitmap Index Scan on idx_properties_project_id  (cost=0.00..4.90 rows=63 width=0) (actual time=0.010..0.010 rows=62.00 loops=1)
+                    Index Cond: (project_id = 217)
+                    Index Searches: 1
+                    Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=411
+Planning Time: 0.561 ms
+Execution Time: 0.157 ms
